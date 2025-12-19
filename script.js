@@ -110,7 +110,7 @@ function playSong(i){
   audio.play();
   isPlaying=true;
   playBtn.textContent="⏸";
-  neonStage.classList.add("playing");
+  document.getElementById("spaceStage").classList.add("playing");
   statusText.textContent="NOW PLAYING";
 
   document.querySelectorAll(".playlist li").forEach(li=>li.classList.remove("active"));
@@ -190,4 +190,5 @@ const data=new Uint8Array(analyser.frequencyBinCount);
     ctx.fillRect(i*w,canvas.height-v/2,w-2,v/2);
   });
 })();
+
 
