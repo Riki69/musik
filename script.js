@@ -26,6 +26,39 @@ fetch("music-list.json")
   initGenres();
   applyFilter();
 });
+/* =========================
+   STARFIELD (SPACE EFFECT)
+   ========================= */
+const starCanvas = document.getElementById("stars");
+const sctx = starCanvas.getContext("2d");
+
+function resizeStars(){
+  starCanvas.width = 300;
+  starCanvas.height = 300;
+}
+resizeStars();
+
+const stars = Array.from({length:80},()=>({
+  x:Math.random()*300,
+  y:Math.random()*300,
+  r:Math.random()*1.5,
+  v:Math.random()*0.3 + 0.1
+}));
+
+function drawStars(){
+  requestAnimationFrame(drawStars);
+  sctx.clearRect(0,0,300,300);
+  stars.forEach(s=>{
+    s.y += s.v;
+    if(s.y > 300) s.y = 0;
+
+    sctx.fillStyle = "#00ff66";
+    sctx.beginPath();
+    sctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    sctx.fill();
+  });
+}
+drawStars();
 
 /* GENRE */
 function initGenres(){
@@ -157,3 +190,4 @@ const data=new Uint8Array(analyser.frequencyBinCount);
     ctx.fillRect(i*w,canvas.height-v/2,w-2,v/2);
   });
 })();
+
