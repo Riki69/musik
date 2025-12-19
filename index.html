@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Neon Music</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar">
+    <h1>NEON MUSIC</h1>
+  </header>
+
+  <main class="main">
+
+    <aside class="sidebar">
+      <h2>Playlist</h2>
+      <ul class="playlist" id="playlist"></ul>
+    </aside>
+
+    <section class="content">
+      <div class="now-playing">
+        <div class="cover"></div>
+        <div class="info">
+          <h3 id="title">Select Music</h3>
+          <p id="artist">Free Music</p>
+        </div>
+      </div>
+
+      <audio id="audio"></audio>
+
+      <div class="controls">
+        <button id="prev">⏮</button>
+        <button id="play">▶</button>
+        <button id="next">⏭</button>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
