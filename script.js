@@ -9,28 +9,27 @@ const progress = document.getElementById("progress");
 const volume = document.getElementById("volume");
 const searchInput = document.getElementById("search");
 const genreBar = document.getElementById("genreBar");
+const neonStage = document.getElementById("neonStage");
+const statusText = document.getElementById("statusText");
 
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
-let songs = [];
-let filteredSongs = [];
-let currentIndex = 0;
-let isPlaying = false;
-let currentGenre = "All";
+let songs=[], filteredSongs=[];
+let currentIndex=0, isPlaying=false, currentGenre="All";
 
-/* LOAD SONG LIST */
+/* LOAD SONGS */
 fetch("music-list.json")
-  .then(res => res.json())
-  .then(data => {
-    songs = data;
-    initGenres();
-    applyFilter();
-  });
+.then(r=>r.json())
+.then(d=>{
+  songs=d;
+  initGenres();
+  applyFilter();
+});
 
-/* GENRES */
+/* GENRE */
 function initGenres(){
-  const genres = ["All", ...new Set(songs.map(s=>s.genre))];
+  const genres=["All",...new Set(songs.map(s=>s.genre))];
   genreBar.innerHTML="";
   genres.forEach(g=>{
     const div=document.createElement("div");
@@ -48,9 +47,9 @@ function initGenres(){
 
 /* FILTER */
 function applyFilter(){
-  const q = searchInput.value.toLowerCase();
-  filteredSongs = songs.filter(s =>
-    (currentGenre==="All" || s.genre===currentGenre) &&
+  const q=searchInput.value.toLowerCase();
+  filteredSongs=songs.filter(s=>
+    (currentGenre==="All"||s.genre===currentGenre)&&
     s.title.toLowerCase().includes(q)
   );
   renderPlaylist();
@@ -69,16 +68,17 @@ function renderPlaylist(){
 
 /* PLAY */
 function playSong(i){
-  const song=filteredSongs[i];
-  if(!song) return;
-
+  const s=filteredSongs[i];
+  if(!s)return;
   currentIndex=i;
-  audio.src=song.url;
-  titleEl.textContent=song.title;
-  artistEl.textContent=song.artist;
+  audio.src=s.url;
+  titleEl.textContent=s.title;
+  artistEl.textContent=s.artist;
   audio.play();
   isPlaying=true;
   playBtn.textContent="⏸";
+  neonStage.classList.add("playing");
+  statusText.textContent="NOW PLAYING";
 
   document.querySelectorAll(".playlist li").forEach(li=>li.classList.remove("active"));
   playlistEl.children[i].classList.add("active");
@@ -86,86 +86,74 @@ function playSong(i){
 
 /* CONTROLS */
 playBtn.onclick=()=>{
-  if(!audio.src) return;
+  if(!audio.src)return;
   if(isPlaying){
-    audio.pause(); playBtn.textContent="▶";
+    audio.pause();
+    playBtn.textContent="▶";
+    neonStage.classList.remove("playing");
+    statusText.textContent="PAUSED";
   }else{
-    audio.play(); playBtn.textContent="⏸";
+    audio.play();
+    playBtn.textContent="⏸";
+    neonStage.classList.add("playing");
+    statusText.textContent="NOW PLAYING";
   }
   isPlaying=!isPlaying;
 };
 
-nextBtn.onclick=()=>{
-  currentIndex=(currentIndex+1)%filteredSongs.length;
-  playSong(currentIndex);
-};
+nextBtn.onclick=()=>playSong((currentIndex+1)%filteredSongs.length);
+prevBtn.onclick=()=>playSong((currentIndex-1+filteredSongs.length)%filteredSongs.length);
 
-prevBtn.onclick=()=>{
-  currentIndex=(currentIndex-1+filteredSongs.length)%filteredSongs.length;
-  playSong(currentIndex);
-};
-
-audio.addEventListener("ended",nextBtn.onclick);
-
-/* SEEK (FIXED) */
-audio.addEventListener("loadedmetadata",()=>{
-  progress.max=audio.duration;
+audio.addEventListener("ended",()=>{
+  neonStage.classList.remove("playing");
+  statusText.textContent="SELECT MUSIC";
 });
 
+/* SEEK */
+audio.addEventListener("loadedmetadata",()=>progress.max=audio.duration);
 audio.addEventListener("timeupdate",()=>{
-  if(!progress.dragging){
-    progress.value=audio.currentTime;
-  }
+  if(!progress.dragging)progress.value=audio.currentTime;
 });
-
 progress.addEventListener("mousedown",()=>progress.dragging=true);
 progress.addEventListener("mouseup",()=>{
   progress.dragging=false;
   audio.currentTime=progress.value;
 });
 
-progress.addEventListener("touchstart",()=>progress.dragging=true);
-progress.addEventListener("touchend",()=>{
-  progress.dragging=false;
-  audio.currentTime=progress.value;
-});
-
 /* VOLUME */
-volume.addEventListener("input",()=>audio.volume=volume.value);
+volume.oninput=()=>audio.volume=volume.value;
 
 /* SEARCH */
-searchInput.addEventListener("input",applyFilter);
+searchInput.oninput=applyFilter;
 
 /* VISUALIZER */
 const AudioContext=window.AudioContext||window.webkitAudioContext;
 const audioCtx=new AudioContext();
-const source=audioCtx.createMediaElementSource(audio);
+const src=audioCtx.createMediaElementSource(audio);
 const analyser=audioCtx.createAnalyser();
-source.connect(analyser);
+src.connect(analyser);
 analyser.connect(audioCtx.destination);
 analyser.fftSize=64;
 
 document.body.addEventListener("click",()=>{
-  if(audioCtx.state==="suspended") audioCtx.resume();
+  if(audioCtx.state==="suspended")audioCtx.resume();
 },{once:true});
 
 function resize(){
   canvas.width=window.innerWidth;
-  canvas.height=60;
+  canvas.height=50;
 }
 window.addEventListener("resize",resize);
 resize();
 
 const data=new Uint8Array(analyser.frequencyBinCount);
-function draw(){
+(function draw(){
   requestAnimationFrame(draw);
   analyser.getByteFrequencyData(data);
   ctx.clearRect(0,0,canvas.width,canvas.height);
   const w=canvas.width/data.length;
   data.forEach((v,i)=>{
-    const h=v/2;
     ctx.fillStyle="#00ff66";
-    ctx.fillRect(i*w,canvas.height-h,w-2,h);
+    ctx.fillRect(i*w,canvas.height-v/2,w-2,v/2);
   });
-}
-draw();
+})();
