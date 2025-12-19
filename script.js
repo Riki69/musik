@@ -9,8 +9,8 @@ const progress = document.getElementById("progress");
 const volume = document.getElementById("volume");
 const searchInput = document.getElementById("search");
 const genreBar = document.getElementById("genreBar");
-const neonStage = document.getElementById("neonStage");
-const statusText = document.getElementById("statusText");
+const videoStage = document.getElementById("videoStage");
+const bgVideo = document.getElementById("bgVideo");
 
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
@@ -26,39 +26,6 @@ fetch("music-list.json")
   initGenres();
   applyFilter();
 });
-/* =========================
-   STARFIELD (SPACE EFFECT)
-   ========================= */
-const starCanvas = document.getElementById("stars");
-const sctx = starCanvas.getContext("2d");
-
-function resizeStars(){
-  starCanvas.width = 300;
-  starCanvas.height = 300;
-}
-resizeStars();
-
-const stars = Array.from({length:80},()=>({
-  x:Math.random()*300,
-  y:Math.random()*300,
-  r:Math.random()*1.5,
-  v:Math.random()*0.3 + 0.1
-}));
-
-function drawStars(){
-  requestAnimationFrame(drawStars);
-  sctx.clearRect(0,0,300,300);
-  stars.forEach(s=>{
-    s.y += s.v;
-    if(s.y > 300) s.y = 0;
-
-    sctx.fillStyle = "#00ff66";
-    sctx.beginPath();
-    sctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    sctx.fill();
-  });
-}
-drawStars();
 
 /* GENRE */
 function initGenres(){
@@ -108,10 +75,10 @@ function playSong(i){
   titleEl.textContent=s.title;
   artistEl.textContent=s.artist;
   audio.play();
+  bgVideo.play();
   isPlaying=true;
   playBtn.textContent="⏸";
-  document.getElementById("spaceStage").classList.add("playing");
-  statusText.textContent="NOW PLAYING";
+  videoStage.classList.add("playing");
 
   document.querySelectorAll(".playlist li").forEach(li=>li.classList.remove("active"));
   playlistEl.children[i].classList.add("active");
@@ -122,14 +89,14 @@ playBtn.onclick=()=>{
   if(!audio.src)return;
   if(isPlaying){
     audio.pause();
+    bgVideo.pause();
     playBtn.textContent="▶";
-    neonStage.classList.remove("playing");
-    statusText.textContent="PAUSED";
+    videoStage.classList.remove("playing");
   }else{
     audio.play();
+    bgVideo.play();
     playBtn.textContent="⏸";
-    neonStage.classList.add("playing");
-    statusText.textContent="NOW PLAYING";
+    videoStage.classList.add("playing");
   }
   isPlaying=!isPlaying;
 };
@@ -138,8 +105,9 @@ nextBtn.onclick=()=>playSong((currentIndex+1)%filteredSongs.length);
 prevBtn.onclick=()=>playSong((currentIndex-1+filteredSongs.length)%filteredSongs.length);
 
 audio.addEventListener("ended",()=>{
-  neonStage.classList.remove("playing");
-  statusText.textContent="SELECT MUSIC";
+  bgVideo.pause();
+  bgVideo.currentTime=0;
+  videoStage.classList.remove("playing");
 });
 
 /* SEEK */
@@ -190,5 +158,3 @@ const data=new Uint8Array(analyser.frequencyBinCount);
     ctx.fillRect(i*w,canvas.height-v/2,w-2,v/2);
   });
 })();
-
-
