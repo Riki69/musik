@@ -16,25 +16,71 @@ body{
   flex-direction:column;
 }
 
-/* TOP */
+/* TOP BAR */
 .topbar{
   display:flex;
-  gap:15px;
   align-items:center;
+  gap:15px;
   padding:12px;
   border-bottom:2px solid #ff0033;
 }
 
 .topbar h1{
+  white-space:nowrap;
   text-shadow:0 0 12px #00ff66;
+}
+
+/* SEARCH + ICON */
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex:1;
 }
 
 #search{
   flex:1;
-  padding:8px;
+  padding:8px 10px;
   background:#000;
   border:2px solid #ff0033;
   color:#00ff66;
+  outline:none;
+}
+
+/* SOCIAL ICONS */
+.social-icons{
+  display:flex;
+  gap:10px;
+}
+
+.icon{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:bold;
+  color:#00ff66;
+  border:2px solid #ff0033;
+  box-shadow:0 0 10px rgba(0,255,102,.3);
+  transition:.25s ease;
+}
+
+.icon:hover{
+  background:#00ff66;
+  color:#000;
+  box-shadow:
+    0 0 10px #00ff66,
+    0 0 20px #00ff66,
+    0 0 40px #00ff66;
+}
+
+.icon.ig:hover,
+.icon.yt:hover{
+  background:#ff0033;
+  box-shadow:0 0 20px #ff0033;
 }
 
 /* GENRE */
@@ -86,7 +132,7 @@ body{
   color:#000;
 }
 
-/* CENTER ANIMATION */
+/* CENTER STAGE */
 .content{
   flex:1;
   display:flex;
@@ -95,7 +141,6 @@ body{
 }
 
 .neon-stage{
-  position:relative;
   text-align:center;
 }
 
@@ -110,8 +155,6 @@ body{
 
 .neon-circle.delay{
   position:absolute;
-  top:0;
-  left:0;
   opacity:.5;
   animation-delay:1.25s;
 }
@@ -123,7 +166,7 @@ body{
   opacity:.7;
 }
 
-/* PLAYING STATE */
+/* PLAYING */
 .playing .neon-circle{
   animation:spinPulse 1.2s linear infinite;
   border-color:#ff0033;
@@ -132,7 +175,6 @@ body{
 
 .playing .neon-text{
   color:#ff0033;
-  letter-spacing:4px;
 }
 
 /* PLAYER */
@@ -146,17 +188,11 @@ body{
 
 .player-top{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:20px;
 }
 
-.track span{
-  font-size:11px;
-  opacity:.7;
-}
-
-/* CONTROLS */
 .controls{
   display:flex;
   gap:15px;
@@ -180,7 +216,6 @@ body{
   color:#000;
 }
 
-/* VOLUME */
 .volume-box{
   display:flex;
   align-items:center;
@@ -231,9 +266,14 @@ input[type=range]::-webkit-slider-thumb{
 /* MOBILE */
 @media(max-width:768px){
   .sidebar{display:none;}
+  .icon{
+    width:32px;
+    height:32px;
+    font-size:12px;
+  }
 }
 
-/* ANIMATION */
+/* ANIM */
 @keyframes pulse{
   0%{transform:scale(1);opacity:.8;}
   50%{transform:scale(1.1);opacity:.4;}
