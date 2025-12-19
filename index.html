@@ -1,53 +1,25 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Neon Music</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<footer class="player">
 
-<div class="app">
+  <div class="track">
+    <strong id="title">Pilih Lagu</strong>
+    <span id="artist">Free Music</span>
+  </div>
 
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <h1>NEON MUSIC</h1>
-    <input type="text" id="search" placeholder="Cari lagu...">
-  </header>
+  <!-- CONTROLS -->
+  <div class="controls">
+    <button id="prev">⏮</button>
+    <button id="play">▶</button>
+    <button id="next">⏭</button>
+  </div>
 
-  <!-- GENRE FILTER -->
-  <div class="genre-bar" id="genreBar"></div>
+  <!-- EXTRA CONTROLS -->
+  <div class="extra">
+    <input type="range" id="progress" value="0">
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+  </div>
 
-  <!-- MAIN -->
-  <main class="main">
-    <aside class="sidebar">
-      <ul class="playlist" id="playlist"></ul>
-    </aside>
+  <!-- VISUALIZER -->
+  <canvas id="visualizer"></canvas>
 
-    <section class="content">
-      <p class="hint">Pilih lagu dari playlist</p>
-    </section>
-  </main>
-
-  <!-- PLAYER BOTTOM -->
-  <footer class="player">
-    <div class="track">
-      <strong id="title">Pilih Lagu</strong>
-      <span id="artist">Free Music</span>
-    </div>
-
-    <div class="controls">
-      <button id="prev">⏮</button>
-      <button id="play">▶</button>
-      <button id="next">⏭</button>
-    </div>
-
-    <audio id="audio"></audio>
-  </footer>
-
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+  <audio id="audio"></audio>
+</footer>
