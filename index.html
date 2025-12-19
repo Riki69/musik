@@ -1,38 +1,7 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Neon Music</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<footer class="player">
 
-<div class="app">
-
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <h1>NEON MUSIC</h1>
-    <input type="text" id="search" placeholder="Cari lagu...">
-  </header>
-
-  <!-- GENRE -->
-  <div class="genre-bar" id="genreBar"></div>
-
-  <!-- MAIN -->
-  <main class="main">
-    <aside class="sidebar">
-      <ul class="playlist" id="playlist"></ul>
-    </aside>
-
-    <section class="content">
-      <p>Pilih lagu dari playlist</p>
-    </section>
-  </main>
-
-  <!-- PLAYER -->
-  <footer class="player">
-
+  <!-- ROW 1 -->
+  <div class="player-top">
     <div class="track">
       <strong id="title">Pilih Lagu</strong>
       <span id="artist">Free Music</span>
@@ -40,22 +9,22 @@
 
     <div class="controls">
       <button id="prev">⏮</button>
-      <button id="play">▶</button>
+      <button id="play" class="play">▶</button>
       <button id="next">⏭</button>
     </div>
 
-    <div class="extra">
-      <input type="range" id="progress" min="0" value="0" step="0.1">
+    <div class="volume-box">
+      🔊
       <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
     </div>
+  </div>
 
-    <canvas id="visualizer"></canvas>
-    <audio id="audio"></audio>
+  <!-- ROW 2 -->
+  <div class="player-bottom">
+    <input type="range" id="progress" min="0" value="0" step="0.1">
+  </div>
 
-  </footer>
+  <canvas id="visualizer"></canvas>
+  <audio id="audio"></audio>
 
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+</footer>
