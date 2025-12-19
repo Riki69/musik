@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Neon Music</title>
+  <title>@benyoriki Music</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +13,17 @@
   <!-- TOP BAR -->
   <header class="topbar">
     <h1>NEON MUSIC</h1>
-    <input type="text" id="search" placeholder="Cari lagu...">
+
+    <div class="top-actions">
+      <input type="text" id="search" placeholder="Cari lagu...">
+
+      <!-- SOCIAL ICONS -->
+      <div class="social-icons">
+        <a href="https://www.instagram.com/benyoriki/?igsh=cGZkOXpuN2JyYjAy#" target="_blank" class="icon ig">IG</a>
+        <a href="https://www.facebook.com/benyo.hermawan/" target="_blank" class="icon fb">FB</a>
+        <a href="https://www.youtube.com/@rikihermawan8103" target="_blank" class="icon yt">YT</a>
+      </div>
+    </div>
   </header>
 
   <!-- GENRE -->
@@ -27,14 +37,20 @@
       <ul class="playlist" id="playlist"></ul>
     </aside>
 
-    <!-- CENTER VIDEO STAGE -->
+    <!-- CENTER STAGE -->
     <section class="content">
-      <div class="video-stage" id="videoStage">
-        <video id="bgVideo" autoplay loop muted playsinline>
-          <source src="video.mp4" type="video/mp4">
-        </video>
-      </div>
-    </section>
+  <div class="space-stage" id="spaceStage">
+    <div class="orb-core"></div>
+
+    <div class="orbit orbit-1"></div>
+    <div class="orbit orbit-2"></div>
+
+    <div class="energy-pulse"></div>
+
+    <canvas id="stars"></canvas>
+  </div>
+</section>
+
 
   </main>
 
