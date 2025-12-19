@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>@benyoriki Music</title>
+  <title>Neon Music</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,17 +13,7 @@
   <!-- TOP BAR -->
   <header class="topbar">
     <h1>NEON MUSIC</h1>
-
-    <div class="top-actions">
-      <input type="text" id="search" placeholder="Cari lagu...">
-
-      <!-- SOCIAL ICONS -->
-      <div class="social-icons">
-        <a href="https://www.instagram.com/benyoriki/?igsh=cGZkOXpuN2JyYjAy#" target="_blank" class="icon ig">IG</a>
-        <a href="https://www.facebook.com/benyo.hermawan/" target="_blank" class="icon fb">FB</a>
-        <a href="https://www.youtube.com/@rikihermawan8103" target="_blank" class="icon yt">YT</a>
-      </div>
-    </div>
+    <input type="text" id="search" placeholder="Cari lagu...">
   </header>
 
   <!-- GENRE -->
@@ -37,12 +27,12 @@
       <ul class="playlist" id="playlist"></ul>
     </aside>
 
-    <!-- CENTER STAGE -->
+    <!-- CENTER VIDEO STAGE -->
     <section class="content">
-      <div class="neon-stage" id="neonStage">
-        <div class="neon-circle"></div>
-        <div class="neon-circle delay"></div>
-        <div class="neon-text" id="statusText">SELECT MUSIC</div>
+      <div class="video-stage" id="videoStage">
+        <video id="bgVideo" autoplay loop muted playsinline>
+          <source src="video.mp4" type="video/mp4">
+        </video>
       </div>
     </section>
 
