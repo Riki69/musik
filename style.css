@@ -94,6 +94,92 @@ body{
     0 0 25px #ff0033,
     0 0 45px #ff0033;
 }
+/* =========================
+   SPACE ANIMATION CENTER
+   ========================= */
+.content{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+/* STAGE */
+.space-stage{
+  position:relative;
+  width:300px;
+  height:300px;
+}
+
+/* CORE ORB */
+.orb-core{
+  position:absolute;
+  inset:80px;
+  border-radius:50%;
+  background:radial-gradient(circle,#00ff66,#003322 70%);
+  box-shadow:
+    0 0 25px #00ff66,
+    0 0 60px rgba(0,255,102,.6);
+  animation:corePulse 3s infinite ease-in-out;
+}
+
+/* ORBITS */
+.orbit{
+  position:absolute;
+  inset:30px;
+  border-radius:50%;
+  border:1px dashed rgba(255,0,51,.6);
+  animation:spin 12s linear infinite;
+}
+
+.orbit-2{
+  inset:10px;
+  animation-duration:20s;
+  border-color:rgba(0,255,102,.4);
+}
+
+/* ENERGY PULSE */
+.energy-pulse{
+  position:absolute;
+  inset:60px;
+  border-radius:50%;
+  border:2px solid rgba(0,255,102,.5);
+  animation:pulseWave 2.8s infinite;
+}
+
+/* STAR CANVAS */
+#stars{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+}
+
+/* PLAYING MODE */
+.playing .orb-core{
+  background:radial-gradient(circle,#ff0033,#330011 70%);
+  box-shadow:
+    0 0 35px #ff0033,
+    0 0 80px rgba(255,0,51,.7);
+}
+
+/* ANIMATIONS */
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+@keyframes corePulse{
+  0%{transform:scale(1);opacity:.8;}
+  50%{transform:scale(1.15);opacity:1;}
+  100%{transform:scale(1);opacity:.8;}
+}
+
+@keyframes pulseWave{
+  0%{transform:scale(.8);opacity:.8;}
+  100%{transform:scale(1.4);opacity:0;}
+}
 
 /* =========================
    RESPONSIVE
@@ -109,3 +195,4 @@ body{
     font-size:12px;
   }
 }
+
