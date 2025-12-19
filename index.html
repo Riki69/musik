@@ -4,17 +4,13 @@
   <meta charset="UTF-8">
   <title>@benyoriki Music</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- STYLE -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app">
 
-  <!-- =========================
-       TOP BAR
-       ========================= -->
+  <!-- HEADER -->
   <header class="topbar">
     <h1>NEON MUSIC</h1>
 
@@ -22,97 +18,47 @@
       <input type="text" id="search" placeholder="Cari lagu...">
 
       <div class="social-icons">
-        <a href="https://www.instagram.com/benyoriki/?igsh=cGZkOXpuN2JyYjAy#" 
-           target="_blank" class="icon ig" title="Instagram">IG</a>
-
-        <a href="https://www.facebook.com/benyo.hermawan/" 
-           target="_blank" class="icon fb" title="Facebook">FB</a>
-
-        <a href="https://www.youtube.com/@rikihermawan8103" 
-           target="_blank" class="icon yt" title="YouTube">YT</a>
+        <a href="https://www.instagram.com/benyoriki/?igsh=cGZkOXpuN2JyYjAy#" target="_blank" class="icon ig">IG</a>
+        <a href="https://www.facebook.com/benyo.hermawan/" target="_blank" class="icon fb">FB</a>
+        <a href="https://www.youtube.com/@rikihermawan8103" target="_blank" class="icon yt">YT</a>
       </div>
     </div>
   </header>
 
-  <!-- =========================
-       GENRE BAR
-       ========================= -->
-  <div class="genre-bar" id="genreBar">
-    <!-- genre button di-generate JS -->
-  </div>
-
-  <!-- =========================
-       MAIN CONTENT
-       ========================= -->
-  <main class="main">
+  <!-- BODY -->
+  <div class="layout">
 
     <!-- PLAYLIST -->
     <aside class="sidebar">
-      <ul class="playlist" id="playlist">
-        <!-- playlist fake dari JS -->
+      <ul id="playlist">
+        <li class="active">Neon Dreams</li>
+        <li>Space Runner</li>
+        <li>Cyber Night</li>
+        <li>Galaxy Beat</li>
+        <li>Future Bass</li>
       </ul>
     </aside>
 
-    <!-- CENTER STAGE (SPACE ANIMATION) -->
-    <section class="content">
-      <div class="space-stage" id="spaceStage">
-
-        <!-- ORB CORE -->
-        <div class="orb-core"></div>
-
-        <!-- ORBITS -->
-        <div class="orbit orbit-1"></div>
-        <div class="orbit orbit-2"></div>
-
-        <!-- ENERGY PULSE -->
-        <div class="energy-pulse"></div>
-
-        <!-- STAR FIELD -->
-        <canvas id="stars"></canvas>
-
+    <!-- CENTER -->
+    <main class="content">
+      <div class="space-stage">
+        <div class="orb"></div>
+        <div class="ring"></div>
+        <div class="ring slow"></div>
       </div>
-    </section>
+    </main>
 
-  </main>
+  </div>
 
-  <!-- =========================
-       PLAYER
-       ========================= -->
+  <!-- PLAYER -->
   <footer class="player">
-
-    <div class="player-top">
-
-      <div class="track">
-        <strong id="title">—</strong>
-        <span id="artist">Free Music</span>
-      </div>
-
-      <div class="controls">
-        <button id="prev">⏮</button>
-        <button id="play" class="play">▶</button>
-        <button id="next">⏭</button>
-      </div>
-
-      <div class="volume-box">
-        🔊
-        <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
-      </div>
-
-    </div>
-
-    <div class="player-bottom">
-      <input type="range" id="progress" min="0" value="0" step="0.1">
-    </div>
-
-    <!-- AUDIO + VISUALIZER -->
-    <canvas id="visualizer"></canvas>
-    <audio id="audio"></audio>
-
+    <button>⏮</button>
+    <button class="play">▶</button>
+    <button>⏭</button>
   </footer>
 
 </div>
 
-<!-- SCRIPT -->
 <script src="script.js"></script>
 </body>
 </html>
