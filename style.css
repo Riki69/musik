@@ -1,4 +1,3 @@
-/* RESET */
 *{
   margin:0;
   padding:0;
@@ -17,182 +16,157 @@ body{
   flex-direction:column;
 }
 
-/* =========================
-   TOP BAR (FIXED VERSION)
-   ========================= */
+/* HEADER */
 .topbar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   padding:12px 16px;
   border-bottom:2px solid #ff0033;
 }
 
-/* TITLE */
 .topbar h1{
   font-size:20px;
-  white-space:nowrap;
-  text-shadow:0 0 12px #00ff66;
+  text-shadow:0 0 10px #00ff66;
 }
 
-/* RIGHT SIDE (SEARCH + ICON) */
 .top-actions{
   display:flex;
   align-items:center;
   gap:12px;
 }
 
-/* SEARCH */
 #search{
-  width:260px;
   padding:8px 10px;
+  width:220px;
   background:#000;
   border:2px solid #ff0033;
   color:#00ff66;
-  outline:none;
 }
 
-/* ICON CONTAINER */
 .social-icons{
   display:flex;
-  align-items:center;
   gap:10px;
 }
 
-/* ICON STYLE */
 .icon{
-  width:36px;
-  height:36px;
+  width:34px;
+  height:34px;
+  border:2px solid #ff0033;
+  color:#00ff66;
   display:flex;
   align-items:center;
   justify-content:center;
   text-decoration:none;
   font-size:13px;
-  font-weight:bold;
-  color:#00ff66;
-  border:2px solid #ff0033;
-  box-shadow:0 0 10px rgba(0,255,102,.4);
-  transition:all .25s ease;
+  transition:.3s;
 }
 
-/* NEON HOVER */
 .icon:hover{
   background:#00ff66;
   color:#000;
-  box-shadow:
-    0 0 10px #00ff66,
-    0 0 25px #00ff66,
-    0 0 45px #00ff66;
+  box-shadow:0 0 20px #00ff66;
 }
 
-/* PLATFORM VARIATION */
-.icon.ig:hover,
-.icon.yt:hover{
-  background:#ff0033;
-  box-shadow:
-    0 0 10px #ff0033,
-    0 0 25px #ff0033,
-    0 0 45px #ff0033;
+/* LAYOUT */
+.layout{
+  flex:1;
+  display:flex;
 }
-/* =========================
-   SPACE ANIMATION CENTER
-   ========================= */
+
+/* SIDEBAR */
+.sidebar{
+  width:220px;
+  border-right:2px solid #ff0033;
+}
+
+.sidebar ul{
+  list-style:none;
+}
+
+.sidebar li{
+  padding:12px;
+  cursor:pointer;
+  border-bottom:1px solid rgba(255,0,51,.3);
+}
+
+.sidebar li.active,
+.sidebar li:hover{
+  background:#00ff66;
+  color:#000;
+}
+
+/* CONTENT */
 .content{
   flex:1;
   display:flex;
-  justify-content:center;
   align-items:center;
-  position:relative;
-  overflow:hidden;
+  justify-content:center;
 }
 
-/* STAGE */
+/* SPACE ANIMATION */
 .space-stage{
+  width:260px;
+  height:260px;
   position:relative;
-  width:300px;
-  height:300px;
 }
 
-/* CORE ORB */
-.orb-core{
+.orb{
   position:absolute;
   inset:80px;
   border-radius:50%;
-  background:radial-gradient(circle,#00ff66,#003322 70%);
-  box-shadow:
-    0 0 25px #00ff66,
-    0 0 60px rgba(0,255,102,.6);
-  animation:corePulse 3s infinite ease-in-out;
+  background:#00ff66;
+  box-shadow:0 0 40px #00ff66;
+  animation:pulse 2.5s infinite;
 }
 
-/* ORBITS */
-.orbit{
+.ring{
   position:absolute;
   inset:30px;
   border-radius:50%;
-  border:1px dashed rgba(255,0,51,.6);
-  animation:spin 12s linear infinite;
+  border:2px dashed #ff0033;
+  animation:spin 10s linear infinite;
 }
 
-.orbit-2{
+.ring.slow{
   inset:10px;
-  animation-duration:20s;
-  border-color:rgba(0,255,102,.4);
+  animation-duration:18s;
+  border-color:#00ff66;
 }
 
-/* ENERGY PULSE */
-.energy-pulse{
-  position:absolute;
-  inset:60px;
-  border-radius:50%;
-  border:2px solid rgba(0,255,102,.5);
-  animation:pulseWave 2.8s infinite;
-}
-
-/* STAR CANVAS */
-#stars{
-  position:absolute;
-  inset:0;
-  z-index:-1;
-}
-
-/* PLAYING MODE */
-.playing .orb-core{
-  background:radial-gradient(circle,#ff0033,#330011 70%);
-  box-shadow:
-    0 0 35px #ff0033,
-    0 0 80px rgba(255,0,51,.7);
-}
-
-/* ANIMATIONS */
 @keyframes spin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
 }
 
-@keyframes corePulse{
-  0%{transform:scale(1);opacity:.8;}
-  50%{transform:scale(1.15);opacity:1;}
-  100%{transform:scale(1);opacity:.8;}
+@keyframes pulse{
+  0%{transform:scale(1);opacity:.7}
+  50%{transform:scale(1.2);opacity:1}
+  100%{transform:scale(1);opacity:.7}
 }
 
-@keyframes pulseWave{
-  0%{transform:scale(.8);opacity:.8;}
-  100%{transform:scale(1.4);opacity:0;}
+/* PLAYER */
+.player{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:12px;
+  border-top:2px solid #ff0033;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
-@media(max-width:768px){
-  #search{
-    width:160px;
-  }
-
-  .icon{
-    width:32px;
-    height:32px;
-    font-size:12px;
-  }
+.player button{
+  background:#000;
+  border:2px solid #ff0033;
+  color:#00ff66;
+  padding:8px 14px;
+  cursor:pointer;
 }
 
+.player button.play{
+  font-size:18px;
+}
+
+.player button:hover{
+  background:#00ff66;
+  color:#000;
+}
