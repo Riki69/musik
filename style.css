@@ -16,7 +16,7 @@ body{
   flex-direction:column;
 }
 
-/* TOP */
+/* TOP BAR */
 .topbar{
   display:flex;
   align-items:center;
@@ -26,15 +26,61 @@ body{
 }
 
 .topbar h1{
+  white-space:nowrap;
   text-shadow:0 0 12px #00ff66;
+}
+
+/* SEARCH + ICON */
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex:1;
 }
 
 #search{
   flex:1;
-  padding:8px;
+  padding:8px 10px;
   background:#000;
   border:2px solid #ff0033;
   color:#00ff66;
+  outline:none;
+}
+
+/* SOCIAL ICONS */
+.social-icons{
+  display:flex;
+  gap:10px;
+}
+
+.icon{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:bold;
+  color:#00ff66;
+  border:2px solid #ff0033;
+  box-shadow:0 0 10px rgba(0,255,102,.3);
+  transition:.25s ease;
+}
+
+.icon:hover{
+  background:#00ff66;
+  color:#000;
+  box-shadow:
+    0 0 10px #00ff66,
+    0 0 20px #00ff66,
+    0 0 40px #00ff66;
+}
+
+.icon.ig:hover,
+.icon.yt:hover{
+  background:#ff0033;
+  box-shadow:0 0 20px #ff0033;
 }
 
 /* GENRE */
@@ -86,36 +132,49 @@ body{
   color:#000;
 }
 
-/* CENTER VIDEO */
+/* CENTER STAGE */
 .content{
   flex:1;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
 
-.video-stage{
-  width:360px;
-  height:200px;
-  border:2px solid #ff0033;
-  box-shadow:0 0 35px rgba(255,0,51,.6);
-  overflow:hidden;
-  position:relative;
+.neon-stage{
+  text-align:center;
 }
 
-.video-stage video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:grayscale(1) contrast(1.2) brightness(.6);
-  opacity:.6;
-  transition:.4s ease;
+.neon-circle{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  border:2px solid #00ff66;
+  box-shadow:0 0 25px #00ff66;
+  animation:pulse 2.5s infinite;
 }
 
-/* PLAYING STATE */
-.playing .video-stage video{
-  filter:none;
-  opacity:.95;
+.neon-circle.delay{
+  position:absolute;
+  opacity:.5;
+  animation-delay:1.25s;
+}
+
+.neon-text{
+  margin-top:25px;
+  font-size:14px;
+  letter-spacing:3px;
+  opacity:.7;
+}
+
+/* PLAYING */
+.playing .neon-circle{
+  animation:spinPulse 1.2s linear infinite;
+  border-color:#ff0033;
+  box-shadow:0 0 30px #ff0033;
+}
+
+.playing .neon-text{
+  color:#ff0033;
 }
 
 /* PLAYER */
@@ -129,17 +188,11 @@ body{
 
 .player-top{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:20px;
 }
 
-.track span{
-  font-size:11px;
-  opacity:.7;
-}
-
-/* CONTROLS */
 .controls{
   display:flex;
   gap:15px;
@@ -163,7 +216,6 @@ body{
   color:#000;
 }
 
-/* VOLUME */
 .volume-box{
   display:flex;
   align-items:center;
@@ -214,4 +266,107 @@ input[type=range]::-webkit-slider-thumb{
 /* MOBILE */
 @media(max-width:768px){
   .sidebar{display:none;}
+  .icon{
+    width:32px;
+    height:32px;
+    font-size:12px;
+  }
+}
+
+/* ANIM */
+@keyframes pulse{
+  0%{transform:scale(1);opacity:.8;}
+  50%{transform:scale(1.1);opacity:.4;}
+  100%{transform:scale(1);opacity:.8;}
+}
+
+@keyframes spinPulse{
+  0%{transform:rotate(0deg) scale(1);}
+  100%{transform:rotate(360deg) scale(1.05);}
+}
+/* =========================
+   SPACE ANIMATION CENTER
+   ========================= */
+.content{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+/* STAGE */
+.space-stage{
+  position:relative;
+  width:300px;
+  height:300px;
+}
+
+/* CORE ORB */
+.orb-core{
+  position:absolute;
+  inset:80px;
+  border-radius:50%;
+  background:radial-gradient(circle,#00ff66,#003322 70%);
+  box-shadow:
+    0 0 25px #00ff66,
+    0 0 60px rgba(0,255,102,.6);
+  animation:corePulse 3s infinite ease-in-out;
+}
+
+/* ORBITS */
+.orbit{
+  position:absolute;
+  inset:30px;
+  border-radius:50%;
+  border:1px dashed rgba(255,0,51,.6);
+  animation:spin 12s linear infinite;
+}
+
+.orbit-2{
+  inset:10px;
+  animation-duration:20s;
+  border-color:rgba(0,255,102,.4);
+}
+
+/* ENERGY PULSE */
+.energy-pulse{
+  position:absolute;
+  inset:60px;
+  border-radius:50%;
+  border:2px solid rgba(0,255,102,.5);
+  animation:pulseWave 2.8s infinite;
+}
+
+/* STAR CANVAS */
+#stars{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+}
+
+/* PLAYING MODE */
+.playing .orb-core{
+  background:radial-gradient(circle,#ff0033,#330011 70%);
+  box-shadow:
+    0 0 35px #ff0033,
+    0 0 80px rgba(255,0,51,.7);
+}
+
+/* ANIMATIONS */
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+@keyframes corePulse{
+  0%{transform:scale(1);opacity:.8;}
+  50%{transform:scale(1.15);opacity:1;}
+  100%{transform:scale(1);opacity:.8;}
+}
+
+@keyframes pulseWave{
+  0%{transform:scale(.8);opacity:.8;}
+  100%{transform:scale(1.4);opacity:0;}
 }
